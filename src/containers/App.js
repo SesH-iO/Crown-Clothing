@@ -5,7 +5,7 @@ import HomePage from '../pages/homepage/homepage';
 import ShopPage from '../containers/Shop/shop';
 import Auth from '../pages/Auth/auth';
 import Header from '../components/Header/header';
-import { auth } from '../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../firebase/firebase.utils';
 
 class App extends React.Component {
 	state = {
@@ -16,9 +16,27 @@ class App extends React.Component {
 
 	// * Google SignIn using O-Auth
 	componentDidMount() {
-		this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-			this.setState({ currentUser: user });
-			// console.log(user);
+		this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+			if (userAuth) {
+				const userRef = await createUserProfileDocument(userAuth);
+
+				// * we listen to the userRef for any changes in the data and also get back the first State of that data
+				userRef.onSnapshot((snapShopt) => {
+					this.setState(
+						{
+							currentUser: {
+								id: snapShopt.id,
+								...snapShopt.data(),
+							},
+						},
+						() => {
+							console.log(this.state);
+						}
+					);
+				});
+			} else {
+				this.setState({ currentUser: userAuth });
+			}
 		});
 	}
 
