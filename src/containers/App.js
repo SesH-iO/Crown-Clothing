@@ -22,17 +22,12 @@ class App extends React.Component {
 
 				// * we listen to the userRef for any changes in the data and also get back the first State of that data
 				userRef.onSnapshot((snapShopt) => {
-					this.setState(
-						{
-							currentUser: {
-								id: snapShopt.id,
-								...snapShopt.data(),
-							},
+					this.setState({
+						currentUser: {
+							id: snapShopt.id,
+							...snapShopt.data(),
 						},
-						() => {
-							console.log(this.state);
-						}
-					);
+					});
 				});
 			} else {
 				this.setState({ currentUser: userAuth });
