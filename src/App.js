@@ -1,26 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import HomePage from './pages/homepage/homepage';
 
-const HatsPage = () => {
+import HomePage from './pages/homepage/homepage';
+import ShopPage from './containers/shop/shop';
+
+function App() {
 	return (
 		<div>
-			<h1>Hats Page</h1>
+			<Switch>
+				<Route exact path='/' component={HomePage} />
+				<Route path='/shop' component={ShopPage} />
+			</Switch>
 		</div>
 	);
-};
-
-class App extends Component {
-	render() {
-		return (
-			<div>
-				<Switch>
-					<Route path='/shop/hats' component={HatsPage} />
-					<Route path='/' component={HomePage} />
-				</Switch>
-			</div>
-		);
-	}
 }
 
 export default App;
