@@ -2,12 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
+import { Provider } from 'react-redux';
+
 import './index.css';
 import App from './containers/App';
+import store from './redux/store';
 
-ReactDOM.render(
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>,
-	document.getElementById('root')
+// * The Provider is the parent component of everything inside our application.
+// * And we can access to everythings related to the store that we put all of the actual code we want to store on our reading stage.
+const app = (
+	<Provider store={store}>
+		<BrowserRouter>
+			<App />
+		</BrowserRouter>
+	</Provider>
 );
+
+ReactDOM.render(app, document.getElementById('root'));
