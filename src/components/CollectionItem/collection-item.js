@@ -23,8 +23,6 @@ const CollectionItem = ({ item, addItem }) => {
 	);
 };
 
-// const mapStateToProps = (state) => ({});
-
 const mapDispatchToProps = (dispatch) => ({
 	addItem: (item) => dispatch(addItem(item)),
 });
