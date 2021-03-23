@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CollectionItem from '../CollectionItem/collection-item';
+import CollectionItem from '../CollectionItems/collection-items';
 
 import './collection-preview.scss';
 
