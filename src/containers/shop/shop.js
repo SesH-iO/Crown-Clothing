@@ -20,12 +20,25 @@ class ShopPage extends React.Component {
 	};
 
 	unsubscribeFromSnapshot = null;
-
+	/*
 	componentDidMount() {
 		const { updateCollections } = this.props;
 		// * 'collections' is name we provided in our firestore
 		const collectionRef = firestore.collection('collections');
-		collectionRef.onSnapshot(async (snapshop) => {
+
+		this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async (snapshop) => {
+			const collectionMap = convertCollectionsSnapshotToMap(snapshop);
+			updateCollections(collectionMap);
+			this.setState({ loading: false });
+		});
+	}
+*/
+	componentDidMount() {
+		const { updateCollections } = this.props;
+		// * 'collections' is name we provided in our firestore
+		const collectionRef = firestore.collection('collections');
+
+		collectionRef.get().then((snapshop) => {
 			const collectionMap = convertCollectionsSnapshotToMap(snapshop);
 			updateCollections(collectionMap);
 			this.setState({ loading: false });

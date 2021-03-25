@@ -25,10 +25,10 @@ class App extends React.Component {
 				const userRef = await createUserProfileDocument(userAuth);
 
 				// * we listen to the userRef for any changes in the data and also get back the first State of that data
-				userRef.onSnapshot((snapShopt) => {
+				userRef.onSnapshot((snapShot) => {
 					setCurrentUser({
-						id: snapShopt.id,
-						...snapShopt.data(),
+						id: snapShot.id,
+						...snapShot.data(),
 					});
 				});
 			}
@@ -61,7 +61,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
 	currentUser: selectCurrentUser,
-});
+ });
 
 const mapDispatchToProps = (dispatch) => ({
 	setCurrentUser: (user) => dispatch(setCurrentUser(user)),
